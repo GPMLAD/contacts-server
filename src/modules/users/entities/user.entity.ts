@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer"
 import { randomUUID } from "crypto"
 
 export class User {
@@ -5,7 +6,9 @@ export class User {
   full_name: string
   email: string
   phone: string
+  @Exclude()
   password: string
+
   readonly register: string
 
   constructor(){
