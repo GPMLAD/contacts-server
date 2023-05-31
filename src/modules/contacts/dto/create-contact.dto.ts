@@ -8,25 +8,24 @@ export class CreateContactDto {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  nickname?: string
+  nickname: string | null
 
   @IsEmail()
   @IsNotEmpty()
   @IsOptional()
-  email?: string
+  email: string | null
 
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  phone?: string
+  phone: string | null
 
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  country?: string
+  country: string | null
 
   @IsString()
   @IsNotEmpty()
-  @IsOptional()
-  user_id?: string
+  user_id: string
 }

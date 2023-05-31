@@ -3,7 +3,9 @@ import { CreateUserDto } from "../../dto/create-user.dto";
 import { UpdateUserDto } from "../../dto/update-user.dto";
 import { User } from "../../entities/user.entity";
 import { UsersRepository } from "../users.repository";
+import { Injectable, NotFoundException } from "@nestjs/common";
 
+@Injectable()
 export class UsersInMemoryRepository implements UsersRepository{
   private database: User[] = []
 
@@ -21,11 +23,22 @@ export class UsersInMemoryRepository implements UsersRepository{
 
   findOne(id: string): User | Promise<User> {
     const user = this.database.find(user=> user.id == id)
+    if(!user){
+      throw new NotFoundException("User not found")
+    }
     return plainToInstance(User, user)
+  }
+
+  findByEmail(email: string):User | Promise<User> {
+    const user = this.database.find(user => user.email == email)
+    return user
   }
 
   update(id: string, data: UpdateUserDto): User | Promise<User> {
     const userIndex = this.database.findIndex(user => user.id == id)
+    if(!userIndex){
+      throw new NotFoundException("User not found")
+    }
     this.database[userIndex] = {
       ...this.database[userIndex],
       ...data
@@ -35,6 +48,9 @@ export class UsersInMemoryRepository implements UsersRepository{
 
   delete(id: string): void | Promise<void> {
     const userIndex = this.database.findIndex(user => user.id == id)
+    if(!userIndex){
+      throw new NotFoundException("User not found")
+    }
     this.database.splice(userIndex,1)
   }
 
