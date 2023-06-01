@@ -19,15 +19,14 @@ export class ContactsPrismaRepository implements ContactsRepository{
 
   }
   
-  async create(data: CreateContactDto): Promise<Contact> {
+  async create(data: CreateContactDto, userId: string): Promise<Contact> {
     const contact = new Contact()
     Object.assign(contact, {...data})
 
-    console.log(contact)
-
     const newContact = await this.prisma.contact.create({
       data:{
-        ...contact
+        ...contact,
+        user_id: userId
       }})
 
     return newContact

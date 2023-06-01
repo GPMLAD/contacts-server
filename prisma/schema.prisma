@@ -26,8 +26,8 @@ model Contact {
   id        String @id
   full_name String
   nickname  String
-  email     String @unique
-  phone     String @unique
+  email     String 
+  phone     String 
   country   String
   added     String
   user      User   @relation(fields: [user_id], references: [id])

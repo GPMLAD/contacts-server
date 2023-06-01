@@ -25,7 +25,5 @@ export class CreateContactDto {
   @IsOptional()
   country: string | null
 
-  @IsString()
-  @IsNotEmpty()
-  user_id: string
+  
 }

@@ -17,14 +17,15 @@ export class ContactsInMemoryRepository implements ContactsRepository{
 
   }
 
-  async create(data: CreateContactDto): Promise<Contact> {
+  async create(data: CreateContactDto, userId: string): Promise<Contact> {
     const newContact = new Contact()
     Object.assign(newContact,{
       ...data,
       nickname: data.nickname || null,
       country: data.country || null,
       email: data.email || null,  
-      phone: data.phone || null
+      phone: data.phone || null,
+      user_id: userId
     })
     this.database.push(newContact)
     return newContact

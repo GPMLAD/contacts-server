@@ -30,18 +30,24 @@ export class UsersPrismaRepository implements UsersRepository{
 
   async findByEmail(email: string): Promise<User> {
     const user = await this.prisma.user.findUnique({where: {email}})
-    return plainToInstance(User, user)
+    return user
   }
 
   async update(id: string, data: UpdateUserDto): Promise<User> {
-    const user = await this.prisma.user.update(({where:{id}, data:{...data}}))
-    if(!user){
+    const myself = await this.prisma.user.findUnique({where: {id}})
+    if(!myself){
       throw new ConflictException("User not exists")
     }
+
+    const user = await this.prisma.user.update(({where:{id}, data:{...data}}))
     return plainToInstance(User, user)
   }
 
   async delete(id: string): Promise<void> {
+    const myself = await this.prisma.user.findUnique({where: {id}})
+    if(!myself){
+      throw new ConflictException("User not exists")
+    }
     await this.prisma.user.delete({where: {id}})
     return
   }

@@ -3,10 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { ContactsModule } from './modules/contacts/contacts.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [UsersModule, ContactsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [UsersModule, ContactsModule, AuthModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
