@@ -3,7 +3,7 @@ import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags("contacts")
 @Controller('contacts')
@@ -26,6 +26,7 @@ export class ContactsController {
 
 
   @Get("")
+  @ApiQuery({name:"group", type: String, required: false, description: "filter by 'county' or 'added'", enum: ["country", "added"]})
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   findAll(@Query("group") group: string | undefined){
