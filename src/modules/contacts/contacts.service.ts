@@ -17,8 +17,8 @@ export class ContactsService {
     return contact
   }
 
-  async findAll(group: string | undefined){
-    return await this.contactRepository.findAll(group)
+  async findAll(group: string | undefined, id: string){
+    return await this.contactRepository.findAll(group, id)
   }
 
   async update(id: string, updateContactDto: UpdateContactDto) {

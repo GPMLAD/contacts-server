@@ -24,7 +24,7 @@ export class CreateUserDto {
 
   @ApiProperty({
     description: "Phone number",
-    default: "+5541123456789",
+    default: "+41912345678",
     type: String
   })
   @IsString()

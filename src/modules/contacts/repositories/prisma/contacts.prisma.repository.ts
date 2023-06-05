@@ -37,8 +37,8 @@ export class ContactsPrismaRepository implements ContactsRepository{
     return plainToInstance(Contact, contact)
   }
   
-  async findAll(group: string): Promise<object | Contact[]> {
-    const contacts = await this.prisma.contact.findMany()
+  async findAll(group: string, id: string): Promise<object | Contact[]> {
+    const contacts = await this.prisma.contact.findMany({where: {user_id: id}})
     if(group){
       return this.groupBy(contacts, group)
     }

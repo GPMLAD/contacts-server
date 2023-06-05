@@ -34,7 +34,7 @@ export class CreateContactDto {
 
   @ApiProperty({
     description: "Contact phone",
-    default: "+1122333333333",
+    default: "11912345678",
     type: String
   })
   @IsString()

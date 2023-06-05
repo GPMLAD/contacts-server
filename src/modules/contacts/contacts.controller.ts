@@ -29,8 +29,8 @@ export class ContactsController {
   @ApiQuery({name:"group", type: String, required: false, description: "filter by 'county' or 'added'", enum: ["country", "added"]})
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  findAll(@Query("group") group: string | undefined){
-    return this.contactsService.findAll(group)
+  findAll(@Query("group") group: string | undefined, @Request() req){
+    return this.contactsService.findAll(group, req.user.id)
   }
 
   @Patch(":id")
